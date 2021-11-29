@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Insurance</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+  <h1>Simple Weather Insurance</h1>
+  <p>
+    Create an Weather Insurance Contract using the form below
+  </p>
+  <div id="mm-detected"></div>
+  <!-- Connect to MetaMask Wallet -->
+  <button id="mm-connect">Connect to MetaMask</button>
+
+  <!-- Display current address -->
+  <div id="mm-current-account"></div>
+  <div id="mm-approved-account"></div>
+
+  <div>_________________</div>
+
+  <!-- Provide an input to change the contract text value -->
+  <div>
+  client address<input id="cc-input-box-client" type="text" placeholder="0x2Ec936D225AB1D3927ebe8fA92b905B99b97cc36"/> (address)
+  </div>
+  <div>
+  duration<input id="cc-input-box-drought-threshold" type="text" placeholder="3"/> (in days)
+  </div>
+  <div>
+  duration<input id="cc-input-box-duration" type="text" placeholder="300"/> (in seconds; 60s == 1 day)  
+  </div>
+  premium<input id="cc-input-box-premium" type="text" placeholder="50000000000"/> (multiply dollar amount by 100000000)
+  </div>
+  <div>
+  payout<input id="cc-input-box-payout" type="text" placeholder="100000000000"/> (multiply dollar amount by 100000000)
+  </div>
+  <div>
+  location<input id="cc-input-box-location" type="text" placeholder="Iowa"/> 
+  </div>
+  <button id="cc-input-button">Create Contract</button>
+  
+
+  <div>_________________</div>
+
+  <!-- Read input from contract -->
+  <div>
+    <button id="cc-get-address">Get New Contract Address</button>
+  </div>
+  <div id="cc-display-address"> </div>
+
+  <div id="contract-input-fields">
+    <br>
+    <div>_____________________</div>
+    <br>
+    <div> Weather Insurance Contract </div>
+    <div>
+      <button id="update-contract">Update Contract</button>
+    </div>
+    <br>
+    <div>
+      <button id="get-current-rainfall">Get Current Rainfall</button>
+    </div>
+    <div id="cc-display-rainfall">Current Rainfall: </div>
+    <div>
+      <button id="get-request-count">Get Request Count</button>
+    </div>
+    <div id="cc-display-request-count">Request Count: </div>
+    <div>
+      <button id="get-contract-active">Get Contract Active Status</button>
+    </div>
+    <div id="cc-display-contract-active">Contract Active: </div>
+    <div>
+      <button id="get-contract-paid">Get Contract Paid Status</button>
+    </div>
+    <div id="cc-display-contract-paid">Contract Paid: </div>
+  </div>
+
+</body>
+
+<!-- Had trouble and had to move the script down! -->
+<script src="dapp.js"></script>
+
+
+</html>

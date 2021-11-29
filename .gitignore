@@ -1,0 +1,10 @@
+frontend/node_modules
+client/logs
+client/*.log
+
+
+artifacts
+node_modules
+build
+.env
+.DS_Store
