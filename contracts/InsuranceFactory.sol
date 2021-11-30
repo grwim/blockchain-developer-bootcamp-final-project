@@ -72,7 +72,7 @@ contract InsuranceFactory is ChainlinkClient {
     /// @param _payoutValue - amount client recieves in event of insurance payout -- multiplied by 100000000, so $100 is 10000000000
     /// @param _cropLocation - name of state, e.g. Iowa
     /// @dev Returns _address - of new contract
-    function createContract(address _client, uint _drought_threshold, uint _duration, uint _premium, uint _payoutValue, string memory _cropLocation) public payable onlyOwner() returns(address) {
+    function createContract(address _client, uint _drought_threshold, uint _duration, uint _premium, uint _payoutValue, string memory _cropLocation) public payable returns(address) {
         
         // create contract, send payout amount so fully funded (ETH)
         uint funding_amount = (_payoutValue * 1 ether).div(uint(getLatestPrice())); // convert dollar amount into weth amount
