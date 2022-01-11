@@ -26,7 +26,7 @@ uint constant WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 uint constant MONTH_IN_SECONDS = 30 * DAY_IN_SECONDS;
 uint constant YEAR_IN_SECONDS = 365 * DAY_IN_SECONDS;
 
-contract InsuranceContract is Ownable, ChainlinkClient {
+contract InsuranceContract is ChainlinkClient {
 
 
     using SafeMath for uint;
@@ -116,7 +116,7 @@ contract InsuranceContract is Ownable, ChainlinkClient {
     /// @param _premium - amount client pays for the insurance contract -- multiplied by 100000000, so $100 is 10000000000
     /// @param _payoutValue - amount client recieves in event of insurance payout -- multiplied by 100000000, so $100 is 10000000000
     /// @param _cropLocation - name of state, e.g. Iowa
-    constructor(address _client, uint _drought_threshold, uint _duration, uint _premium, uint _payoutValue, string memory _cropLocation, address _link, uint256 _oraclePaymentAmount) payable Ownable() public {
+    constructor(address _client, uint _drought_threshold, uint _duration, uint _premium, uint _payoutValue, string memory _cropLocation, address _link, uint256 _oraclePaymentAmount) payable public {
         
         /**
          * Network: Rinkeby

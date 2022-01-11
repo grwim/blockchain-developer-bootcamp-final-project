@@ -1,0 +1,2 @@
+the frontend was deployed with surge and is hosted here: addicted-mailbox.surge.sh
+the insurance factory was deployed on rinkey at: 0x88d1e7F9549a40Ba6E7e01Aa471Aaf8692983fCe

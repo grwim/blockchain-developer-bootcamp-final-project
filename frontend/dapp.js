@@ -2,7 +2,7 @@
 
 // contract address on Ropsten:
 // const factoryAddress = '0x7FA6FDA76F895c5E8D4caa2C83A212A2ED8B3036' old 
-const factoryAddress = '0x88d1e7F9549a40Ba6E7e01Aa471Aaf8692983fCe'
+const factoryAddress = '0xf1026645032D24Dfa919912BABFF5e3A046807cE'
 
 // add contract ABI from Remix:
 
@@ -333,88 +333,6 @@ const factoryABI = [
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_client",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_drought_threshold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_duration",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_premium",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_payoutValue",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_cropLocation",
-				"type": "string"
-			}
-		],
-		"name": "createContract",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_contractAddress",
-				"type": "address"
-			}
-		],
-		"name": "getContractRainfall",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "previousOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "OwnershipTransferred",
-		"type": "event"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -465,64 +383,8 @@ const factoryABI = [
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_contractAddress",
-				"type": "address"
-			}
-		],
-		"name": "getContractRequestCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"stateMutability": "payable",
 		"type": "fallback"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_contractAddress",
-				"type": "address"
-			}
-		],
-		"name": "updateContract",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"stateMutability": "payable",
-		"type": "receive"
 	},
 	{
 		"inputs": [
@@ -544,6 +406,88 @@ const factoryABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_client",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_drought_threshold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_duration",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_premium",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_payoutValue",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_cropLocation",
+				"type": "string"
+			}
+		],
+		"name": "createContract",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_contractAddress",
+				"type": "address"
+			}
+		],
+		"name": "getContractRainfall",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_contractAddress",
+				"type": "address"
+			}
+		],
+		"name": "getContractRequestCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getLatestPrice",
 		"outputs": [
@@ -557,17 +501,21 @@ const factoryABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
+		"inputs": [
 			{
-				"internalType": "address",
-				"name": "",
+				"internalType": "address payable",
+				"name": "_contractAddress",
 				"type": "address"
 			}
 		],
-		"stateMutability": "view",
+		"name": "updateContract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	}
 ]
 
@@ -1026,8 +974,8 @@ cc_Submit.onclick = async () => {
   console.log(return_obj)
   console.log('contract created at address', contractAddress)
 
-  return_obj = await InsuranceFactory.methods.owner().call()
-  console.log('result from InsuranceFactory.owner()', return_obj) 
+  // return_obj = await InsuranceFactory.methods.owner().call()
+  // console.log('result from InsuranceFactory.owner()', return_obj) 
 
   var mmApprovedAccount = document.getElementById('mm-approved-account');
   mmApprovedAccount.innerHTML = 'Approved Account: ' + return_obj
@@ -1040,8 +988,10 @@ InsuranceContract = ''
 ccGetAddress.onclick = async () => {
 
   const ccDisplayAddress = document.getElementById('cc-display-address')
-
   ccDisplayAddress.innerHTML = 'New Contract Address: ' + contractAddress
+
+  const ccDisplayAdvice = document.getElementById('cc-display-advice')
+  ccDisplayAdvice.innerHTML = 'NOTICE: be sure to fund the new insurance contract with LINK and ETH here: https://faucets.chain.link/rinkeby'
 
   if (contractAddress != 'undetermined') {
 	document.getElementById("contract-input-fields").style.visibility = "visible";

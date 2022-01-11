@@ -6,7 +6,7 @@ pragma solidity ^0.8.9;
 /// @dev InsuranceFactories need to be funded with LINK and ETH -- https://faucets.chain.link/rinkeby
 
 // Open Zeppelin Imports
-import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 // Truffle Imports

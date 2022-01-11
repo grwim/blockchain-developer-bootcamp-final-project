@@ -168,7 +168,6 @@ contract("InsuranceFactory", async accounts => {
               let rainfall_result = await insurance_factory.getContractRainfall(insurance_contract_address)
 
               console.log('rainfall value', rainfall_result.receipt.rawLogs.data)
-
           })
 
           /// @dev tests requested call of getContractRequestCount() from new insurance contract. Expect no revert
@@ -180,7 +179,7 @@ contract("InsuranceFactory", async accounts => {
           }) 
         })
       })
-
+    })
     // it("should be able to get the latest USD/ETH price from chainlink", async () => {
     //     // const instance = await InsuranceFactory.deployed();
 
