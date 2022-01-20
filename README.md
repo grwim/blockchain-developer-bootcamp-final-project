@@ -43,10 +43,10 @@ https://www.loom.com/share/c187757727ef45d389a36b55473f5705
 
 ## Directory structure
 - `front:` Project's css/html/javascript frontend.
-- `contracts:` Smart contracts that are deployed in the Ropsten testnet.
 - `migrations:` Migration files for deploying contracts in contracts directory.
+- `contracts:` Smart contracts that are deployed in the Rinkeby testnet.
 - `test:` Tests for smart contracts.
-- `test-auxilary:` Tests for smart contracts on rinkeby
+- `test-auxilary:` Tests for smart contracts on Rinkeby
 - `docs:` further documentation for the project
 
 

@@ -8,7 +8,7 @@ module.exports = async (deployer, network, [defaultAccount]) => {
     // contract automatically retrieve the correct address for you
     deployer.deploy(InsuranceFactory, {from: defaultAccount})
   } else if (network.startsWith('development')) {
-    deployer.deploy(InsuranceFactory) // todo: may need to add defaultAccount
+    deployer.deploy(InsuranceFactory, {from: defaultAccount}) // todo: may need to add defaultAccount
   } else {
     console.log('error with InsuranceFactory migration')
   }
