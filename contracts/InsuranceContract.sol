@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 /// @title InsuranceContract -- Simple Weather Insurance
 /// @author Konrad M. Rauscher
 /// @notice You can use this contract for basic parametric weather insurance, according to rainfall 
-/// @dev InsuranceContracts need to be funded with LINK sepperately (InsuranceFactory doesnt do so on createContract())
+/// @dev InsuranceContracts need to be funded with LINK sepperately (InsuranceFactory doesnt do so on createContract()
 /// @custom:experimental This is an experimental contract.
 
 // Open Zeppelin Imports
@@ -14,10 +14,6 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
-
-string constant WEATHERBIT_URL = "https://api.weatherbit.io/v2.0/current?";
-string constant WEATHERBIT_KEY = "9ba8e169305f40269521e7e9cd20bbbb";
-string constant WEATHERBIT_PATH = "data.0.precip";
 
 // uint constant MINUTE_IN_SECONDS = 60;
 // uint constant HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
@@ -74,13 +70,13 @@ contract InsuranceContract is ChainlinkClient, Ownable {
     
     AggregatorV3Interface internal priceFeed;
 
-    /**
-     * @dev Prevents a function being run unless it's called by Insurance Provider
-     */
-    modifier onlyOwner() override {
-		require(insurer == msg.sender,'Only Insurance provider can do this');
-        _;
-    }
+    // /**
+    //  * @dev Prevents a function being run unless it's called by Insurance Provider
+    //  */
+    // modifier onlyOwner() override {
+	// 	require(insurer == msg.sender,'Only Insurance provider can do this');
+    //     _;
+    // }
 
     /**
      * @dev Prevents a function being run unless contract is still active
@@ -143,8 +139,8 @@ contract InsuranceContract is ChainlinkClient, Ownable {
     /// @notice instantiates a new InsuranceContract
     /// @param _client - address of the client
     /// @param _duration - the length of the contract (60 seconds = 1 day for testing purposes; e.g. 300 --> 5 days)
-    /// @param _premium - amount client pays for the insurance contract -- multiplied by 100000000, so $100 is 10000000000
-    /// @param _payoutValue - amount client recieves in event of insurance payout -- multiplied by 100000000, so $100 is 10000000000
+    /// @param _premium - amount client pays for the insurance contract, in dollars
+    /// @param _payoutValue - amount client recieves in event of insurance payout, in dollars
     /// @param _cropLocation - name of state, e.g. 
     constructor(address _client, uint _duration, uint _premium, uint _payoutValue, string memory _cropLocation, address _link, uint256 _oraclePaymentAmount) payable public {
         
@@ -178,10 +174,15 @@ contract InsuranceContract is ChainlinkClient, Ownable {
         // jobId = '1bc4f827ff5942eaaa7540b7dd1e20b9';
 
         // set the oracles and jobids to values from nodes on market.link
-        oracles[0] = 0x240BaE5A27233Fd3aC5440B5a598467725F7D1cd;
-        oracles[1] = 0x5b4247e58fe5a54A116e4A3BE32b31BE7030C8A3;
-        jobIds[0] = '1bc4f827ff5942eaaa7540b7dd1e20b9';
-        jobIds[1] = 'e67ddf1f394d44e79a9a2132efd00050';
+        // oracles[0] = 0x240BaE5A27233Fd3aC5440B5a598467725F7D1cd;
+        // oracles[1] = 0x5b4247e58fe5a54A116e4A3BE32b31BE7030C8A3;
+        // jobIds[0] = '1bc4f827ff5942eaaa7540b7dd1e20b9';
+        // jobIds[1] = 'e67ddf1f394d44e79a9a2132efd00050';
+
+        oracles[0] = 0x1b666ad0d20bC4F35f218120d7ed1e2df60627cC;
+        oracles[1] = 0x7F2b5771f47B3bBD2b5043c369Bf581fBd1804C7;
+        jobIds[0] = '2d3cc1fdfede46a0830bbbf5c0de2528';
+        jobIds[1] = 'c60471889fc4408f877733a831b7961e';
 
         emit contractCreated(insurer, client, duration, premium, payoutValue);
     }
@@ -226,10 +227,10 @@ contract InsuranceContract is ChainlinkClient, Ownable {
 
     /// @notice checks whether contract has finished yet. if it has, update contractActive
     function checkEndContract() private onContractEnded () {
-        //insurer must have performed at least 1 weather call /day to retrieve funds back.
-        //allow for 1 missed weather call, in case of unexpected issues on a given day.
+        // insurer must have performed at least 1 weather call /day to retrieve funds back.
+        // allow for 1 missed weather call, in case of unexpected issues on a given day.
         
-        if (requestCount >= (duration.div(DAY_IN_SECONDS) - 2)) { // { TODO -- SOMETHING BROKEN HERE -- 
+        if (requestCount >= (duration.div(DAY_IN_SECONDS) - 2)) { // 
             //return funds back to insurance provider then end/kill the contract
             insurer.transfer(address(this).balance);
         } else { //insurer hasn't done the minimum number of data requests, client is eligible to receive his premium back
@@ -279,7 +280,7 @@ contract InsuranceContract is ChainlinkClient, Ownable {
         currentRainfallList[dataRequestsSent] = _rainfall; 
         dataRequestsSent = dataRequestsSent + 1;
 
-               //set current rainfall to average of both values
+        //set current rainfall to average of both values
        if (dataRequestsSent > 1) {
             currentRainfall = (currentRainfallList[0].add(currentRainfallList[1]).div(2));
             currentRainfallDateChecked = block.timestamp;
@@ -304,8 +305,6 @@ contract InsuranceContract is ChainlinkClient, Ownable {
     /// @notice transfers payout amount to client, returns remaining funds (premium) back to Insurer, and marks contract as closed
     function payOutContract() private onContractActive() { 
         
-        // todo require checks for other transfers)
-
         // transfer agreed payout value to client
         client.transfer(address(this).balance);
         // payable(client).transfer(payoutValue);

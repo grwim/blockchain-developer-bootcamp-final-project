@@ -18,17 +18,24 @@ import "./InsuranceContract.sol";
 
 // import "hardhat/console.sol";
 
-// uint constant ORACLE_PAYMENT = 0.1 * 10 ** 18; // 0.1 LINK
-uint constant ORACLE_PAYMENT = 0.1 * 10 ** 17; // 0.01 LINK *
 
-address constant LINK_RINKEBY = 0x01BE23585060835E02B77ef475b0Cc51aA1e0709;
 
 // responsible for generating new InsuranceContracts
 // will fund each generated insurance contract with enough ETH and LINK so that once generated, each insurance contract can perform all required operations throughout their
 contract InsuranceFactory is ChainlinkClient { 
     
-    AggregatorV3Interface internal priceFeed;
     using SafeMath for uint;
+
+    uint public constant DAY_IN_SECONDS = 60; //How many seconds in a day. 60 for testing, 86400 for Production
+    address public insurer = msg.sender;
+    AggregatorV3Interface internal priceFeed;
+    uint constant ORACLE_PAYMENT = 0.1 * 10 ** 18; // 0.1 LINK
+    // uint constant ORACLE_PAYMENT = 0.1 * 10 ** 17; // 0.01 LINK *
+
+    address constant LINK_RINKEBY = 0x01BE23585060835E02B77ef475b0Cc51aA1e0709;
+
+    /// @notice stores insurance contracts
+    mapping(address => InsuranceContract) public contracts;
     
     function getLatestPrice() public view returns (int) { ///
         (
@@ -49,9 +56,6 @@ contract InsuranceFactory is ChainlinkClient {
     /// @notice emited on call to get contractRainfall
     event contractRainfall(uint amount_rainfall);
 
-    /// @notice stores insurance contracts
-    mapping(address => InsuranceContract) public contracts;
-    
     /// @notice initializes the Chainlink ETH/USD price feed
     /// @dev sets up a chainlink price feed on Rinkeby
     constructor() {
@@ -70,7 +74,7 @@ contract InsuranceFactory is ChainlinkClient {
     /// @param _payoutValue - amount client recieves in event of insurance payout -- multiplied by 100000000, so $100 is 10000000000
     /// @param _cropLocation - name of state, e.g. Iowa
     /// @dev Returns _address - of new contract
-    function createContract(address _client, uint _duration, uint _premium, uint _payoutValue, string memory _cropLocation) public payable returns(address) {
+    function createContract(address _client, uint _duration, uint _premium, uint _payoutValue, string memory _cropLocation) public payable /* onlyOwner() */ returns(address) {
         
         // create contract, send payout amount so fully funded (ETH) plus a small buffer
         uint funding_amount = (_payoutValue * 1 ether).div(uint(getLatestPrice())); // convert dollar amount into weth amount

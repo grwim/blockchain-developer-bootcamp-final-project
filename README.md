@@ -59,9 +59,6 @@ https://www.loom.com/share/c187757727ef45d389a36b55473f5705
 ## What I'd like the project to do (MVP)
 A user is able to purchase insurance, and should be payed out an agreed value if no rainfall happens at a specified location for a specified period (i.e. the Claim). The contract(s) will use Chainlink oracles to obtain rainfall data. Upon a Claim being triggered, the contract(s) should ensure the payout to the user takes place by already having the payout ‘locked up’ in advance. If a Claim is not triggered within the specified period, the payout is returned to the insurer.
 
-## Note: Functionality is limited in this submission 
-The complexities Chainlink introduced to this project ended up being quite time intensive. Because Chainlink-based functionality for this project has not been completely debugged at the time of submission, the functionality described in the following Simple worklflow is a subset of the flow intended for this project that is still in accordance final project submission specifications. 
-
 ## Simple workflow
 1. Arrive on page
 2. Login with MetaMask
@@ -72,12 +69,13 @@ The complexities Chainlink introduced to this project ended up being quite time 
 7. Call Get Request Count, observe new result
 
 
-## Goal Workflow (Not yet complete)
+## Full Workflow
 ###### Preconditions: 
 - User has requested an insurance contract with some terms
 - User has paid the premium for the insurance contract
 
 ###### Flow
+0. The Insurer creates a new insuranceFactory, and fund the insuranceFactory with enough ETH and LINK for the factory to create fully-funded insurance contracts. 
 1. The Insurer defines terms for new insurance contract 
 2. The Insurer generates new insurance contract with enough funds to perform operations for the duration of the contract term
 3. The Insurer must call the contract on a daily basis to request rainfall data via chainlink oracles until either (1) the payout condition is met or (2) the end of the contract term. If the Insurer does not request enough updates of the oracle data, the premium is returned to the User and any remaining funds are returned to the Insurer
@@ -88,7 +86,6 @@ The complexities Chainlink introduced to this project ended up being quite time 
 - Insurance contract has been paid out, and is no longer active.
 
 ## Down the Road — Nice to Haves
-- Source data from multiple sources to reduce integrity risks with any single source. 
 - Automate the updating of oracle data 
 - Include the precondition of an insurance request and premium payment as part of the workflow 
 - Provide recommendation of reasonable rates, according to the insurance terms requested by the User 
